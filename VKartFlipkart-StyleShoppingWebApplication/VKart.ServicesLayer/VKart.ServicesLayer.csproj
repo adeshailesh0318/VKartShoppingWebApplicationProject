@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\VKart.DataAccessLayer\VKart.DataAccessLayer.csproj" />
+    <ProjectReference Include="..\VKart.ModelsLayer\VKart.ModelsLayer.csproj" />
+    <ProjectReference Include="..\VKart.RepositoriesLayer\VKart.RepositoriesLayer.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\VKart.DataAccessLayer\VKart.DataAccessLayer.csproj" />
+    <ProjectReference Include="..\VKart.ModelsLayer\VKart.ModelsLayer.csproj" />
+    <ProjectReference Include="..\VKart.RepositoriesLayer\VKart.RepositoriesLayer.csproj" />
+    <ProjectReference Include="..\VKart.ServicesLayer\VKart.ServicesLayer.csproj" />
+    <ProjectReference Include="..\VKart.WebApiUILayer\VKart.WebApiUILayer.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Areas\Admin\Models\" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,119 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] – V-Cart</title>
+
+    <!-- Bootstrap 5 + Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+
+<!-- d-flex flex-column min-vh-100 lagane se footer hamesha bottom par stick ho jata hai -->
+<body class="d-flex flex-column min-vh-100" style="background-color: #f8f9fc;">
+
+    <!-- Navbar -->
+    @await Html.PartialAsync("_Navbar")
+
+    <!-- Main Content Area (flex-grow-1 lagane se ye pure bachi hui space le leta hai) -->
+    <main class="container py-4 flex-grow-1">
+
+        <!-- TempData Alerts -->
+        @if (TempData["Success"] != null)
+        {
+            <div class="alert alert-success alert-dismissible fade show shadow-sm" role="alert">
+                <i class="bi bi-check-circle-fill me-2"></i>@TempData["Success"]
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        }
+        @if (TempData["Error"] != null)
+        {
+            <div class="alert alert-danger alert-dismissible fade show shadow-sm" role="alert">
+                <i class="bi bi-exclamation-circle-fill me-2"></i>@TempData["Error"]
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        }
+
+        @RenderBody()
+    </main>
+
+    <!-- Real-world Professional Footer -->
+    <!-- Real-world Professional Footer -->
+    <footer class="bg-dark text-white pt-5 pb-4 mt-auto">
+        <div class="container">
+            <div class="row g-4">
+                <!-- Brand & Info -->
+                <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
+                    <h5 class="fw-bold mb-3"><i class="bi bi-cart4 me-2 text-warning"></i>V-Cart</h5>
+                    <p class="text-white-50 small mb-4">
+                        Your one-stop shop for the latest electronics, fashion, books, and more.
+                        Built as a learning project using ASP.NET Core 8.
+                    </p>
+                    <div class="d-flex gap-3">
+                        <a href="#" class="text-white-50 fs-5 text-decoration-none hover-white"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="text-white-50 fs-5 text-decoration-none hover-white"><i class="bi bi-twitter-x"></i></a>
+                        <a href="#" class="text-white-50 fs-5 text-decoration-none hover-white"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="text-white-50 fs-5 text-decoration-none hover-white"><i class="bi bi-linkedin"></i></a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="col-lg-2 col-md-6 mb-4 mb-md-0">
+                    <h6 class="fw-bold mb-3 text-uppercase text-warning">Shop</h6>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a asp-controller="Products" asp-action="Index" class="text-white-50 text-decoration-none small hover-white">All Products</a></li>
+                        <li class="mb-2"><a asp-controller="Home" asp-action="Index" class="text-white-50 text-decoration-none small hover-white">New Arrivals</a></li>
+                        <li class="mb-2"><a asp-controller="Cart" asp-action="Index" class="text-white-50 text-decoration-none small hover-white">Your Cart</a></li>
+                        <li class="mb-2"><a asp-controller="Orders" asp-action="Index" class="text-white-50 text-decoration-none small hover-white">My Orders</a></li>
+                    </ul>
+                </div>
+
+                <!-- Customer Service -->
+                <div class="col-lg-2 col-md-6 mb-4 mb-md-0">
+                    <h6 class="fw-bold mb-3 text-uppercase text-warning">Support</h6>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-white-50 text-decoration-none small hover-white">Help Center</a></li>
+                        <li class="mb-2"><a href="#" class="text-white-50 text-decoration-none small hover-white">Returns Policy</a></li>
+                        <li class="mb-2"><a href="#" class="text-white-50 text-decoration-none small hover-white">Shipping Info</a></li>
+                        <li class="mb-2"><a href="#" class="text-white-50 text-decoration-none small hover-white">Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Info -->
+                <div class="col-lg-4 col-md-6">
+                    <h6 class="fw-bold mb-3 text-uppercase text-warning">Contact Us</h6>
+                    <ul class="list-unstyled text-white-50 small">
+                        <li class="mb-2"><i class="bi bi-geo-alt-fill me-2 text-warning"></i>123 Tech Street, Bengaluru, India 560001</li>
+                        <li class="mb-2"><i class="bi bi-telephone-fill me-2 text-warning"></i>+91 98765 43210</li>
+                        <li class="mb-2"><i class="bi bi-envelope-fill me-2 text-warning"></i>support@vcart.com</li>
+                    </ul>
+                </div>
+            </div>
+
+            <hr class="mt-4 mb-4 border-secondary">
+
+            <!-- Bottom Bar -->
+            <div class="row align-items-center">
+                <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                    <span class="text-white-50 small">© @DateTime.Now.Year V-Cart – Learning project. All rights reserved.</span>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <!-- Payment Icons using Bootstrap Icons (Never breaks) -->
+                    <span class="text-white-50 small me-2">We accept:</span>
+                    <i class="bi bi-credit-card-2-front fs-4 text-white-50 me-2" title="Credit Card"></i>
+                    <i class="bi bi-paypal fs-4 text-white-50 me-2" title="PayPal"></i>
+                    <i class="bi bi-wallet2 fs-4 text-white-50 me-2" title="Wallet"></i>
+                    <i class="bi bi-cash-coin fs-4 text-white-50" title="Cash on Delivery"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <partial name="_ValidationScriptsPartial" />
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

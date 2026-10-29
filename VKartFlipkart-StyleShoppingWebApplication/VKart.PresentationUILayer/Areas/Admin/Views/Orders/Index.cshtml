@@ -1,0 +1,49 @@
+﻿@model IEnumerable<VKart.ModelsLayer.DTOs.OrderDto>
+@{
+    ViewData["Title"] = "Orders";
+}
+
+<h4 class="fw-bold mb-4">All Orders</h4>
+
+<div class="card border-0 shadow-sm rounded-4">
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+                <thead class="bg-light">
+                    <tr class="text-muted small">
+                        <th class="ps-4">Order ID</th>
+                        <th>Customer</th>
+                        <th>Date</th>
+                        <th>Amount</th>
+                        <th>Status</th>
+                        <th class="text-end pe-4">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var o in Model)
+                    {
+                        <tr>
+                            <td class="ps-4 fw-semibold">#@o.OrderId</td>
+                            <td>
+                                <div>@o.CustomerName</div>
+                                <div class="text-muted small">@o.CustomerEmail</div>
+                            </td>
+                            <td class="small text-muted">@o.OrderDate.ToString("dd MMM yyyy")</td>
+                            <td class="fw-semibold">₹@o.TotalAmount.ToString("N0")</td>
+                            <td>
+                                <span class="badge-status @(o.OrderStatusText == "Delivered" ? "bg-success bg-opacity-10 text-success" : o.OrderStatusText == "Cancelled" ? "bg-danger bg-opacity-10 text-danger" : o.OrderStatusText == "Shipped" ? "bg-info bg-opacity-10 text-info" : "bg-primary bg-opacity-10 text-primary")">
+                                    @o.OrderStatusText
+                                </span>
+                            </td>
+                            <td class="text-end pe-4">
+                                <a asp-action="Details" asp-route-id="@o.OrderId" class="btn btn-sm btn-outline-vcart">
+                                    <i class="bi bi-eye"></i> Manage
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,12 @@
+C:\VKartFlipkartStyleShoppingWebApplication\VKartFlipkart-StyleShoppingWebApplication\VKart.ModelsLayer\bin\Debug\net8.0\VKart.ModelsLayer.deps.json
+C:\VKartFlipkartStyleShoppingWebApplication\VKartFlipkart-StyleShoppingWebApplication\VKart.ModelsLayer\bin\Debug\net8.0\VKart.ModelsLayer.dll
+C:\VKartFlipkartStyleShoppingWebApplication\VKartFlipkart-StyleShoppingWebApplication\VKart.ModelsLayer\bin\Debug\net8.0\VKart.ModelsLayer.pdb
+C:\VKartFlipkartStyleShoppingWebApplication\VKartFlipkart-StyleShoppingWebApplication\VKart.ModelsLayer\obj\Debug\net8.0\VKart.ModelsLayer.csproj.AssemblyReference.cache
+C:\VKartFlipkartStyleShoppingWebApplication\VKartFlipkart-StyleShoppingWebApplication\VKart.ModelsLayer\obj\Debug\net8.0\VKart.ModelsLayer.GeneratedMSBuildEditorConfig.editorconfig
+C:\VKartFlipkartStyleShoppingWebApplication\VKartFlipkart-StyleShoppingWebApplication\VKart.ModelsLayer\obj\Debug\net8.0\VKart.ModelsLayer.AssemblyInfoInputs.cache
+C:\VKartFlipkartStyleShoppingWebApplication\VKartFlipkart-StyleShoppingWebApplication\VKart.ModelsLayer\obj\Debug\net8.0\VKart.ModelsLayer.AssemblyInfo.cs
+C:\VKartFlipkartStyleShoppingWebApplication\VKartFlipkart-StyleShoppingWebApplication\VKart.ModelsLayer\obj\Debug\net8.0\VKart.ModelsLayer.csproj.CoreCompileInputs.cache
+C:\VKartFlipkartStyleShoppingWebApplication\VKartFlipkart-StyleShoppingWebApplication\VKart.ModelsLayer\obj\Debug\net8.0\VKart.ModelsLayer.dll
+C:\VKartFlipkartStyleShoppingWebApplication\VKartFlipkart-StyleShoppingWebApplication\VKart.ModelsLayer\obj\Debug\net8.0\refint\VKart.ModelsLayer.dll
+C:\VKartFlipkartStyleShoppingWebApplication\VKartFlipkart-StyleShoppingWebApplication\VKart.ModelsLayer\obj\Debug\net8.0\VKart.ModelsLayer.pdb
+C:\VKartFlipkartStyleShoppingWebApplication\VKartFlipkart-StyleShoppingWebApplication\VKart.ModelsLayer\obj\Debug\net8.0\ref\VKart.ModelsLayer.dll

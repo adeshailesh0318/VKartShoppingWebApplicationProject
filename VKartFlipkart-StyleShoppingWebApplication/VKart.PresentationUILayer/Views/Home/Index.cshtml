@@ -1,0 +1,149 @@
+﻿@model VKart.PresentationLayer.ViewModels.HomeViewModel
+@{
+    ViewData["Title"] = "Home";
+}
+
+<!-- Top Strip -->
+<div class="bg-white border-bottom py-2 mb-4 rounded shadow-sm">
+    <div class="container d-flex flex-wrap justify-content-between small text-muted">
+        <div><i class="bi bi-truck me-1"></i>Free delivery on orders above ₹499</div>
+        <div><i class="bi bi-arrow-repeat me-1"></i>7-day easy returns</div>
+        <div><i class="bi bi-cash-coin me-1"></i>Cash on Delivery available</div>
+    </div>
+</div>
+
+<!-- Carousel / Sliding Banner Start -->
+<div id="heroCarousel" class="carousel slide mb-4 shadow-sm rounded-4 overflow-hidden" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=1600&q=80" class="d-block w-100" alt="Mega Sale" style="height: 350px; object-fit: cover;">
+            <div class="carousel-caption d-none d-md-block text-start" style="background: rgba(0,0,0,0.5); padding: 20px; border-radius: 10px; max-width: 400px; bottom: 40px; left: 5%;">
+                <h2 class="fw-bold text-warning">Mega Shopping Festival</h2>
+                <p class="fs-5 mb-0">Up to 50% OFF on Electronics & Fashion.</p>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=1600&q=80" class="d-block w-100" alt="Audio Sale" style="height: 350px; object-fit: cover;">
+            <div class="carousel-caption d-none d-md-block text-start" style="background: rgba(0,0,0,0.5); padding: 20px; border-radius: 10px; max-width: 400px; bottom: 40px; left: 5%;">
+                <h2 class="fw-bold text-warning">Premium Headphones</h2>
+                <p class="fs-5 mb-0">Immerse yourself in high-quality sound.</p>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=1600&q=80" class="d-block w-100" alt="Smartwatches" style="height: 350px; object-fit: cover;">
+            <div class="carousel-caption d-none d-md-block text-start" style="background: rgba(0,0,0,0.5); padding: 20px; border-radius: 10px; max-width: 400px; bottom: 40px; left: 5%;">
+                <h2 class="fw-bold text-warning">New Arrivals</h2>
+                <p class="fs-5 mb-0">Explore the latest smartwatches and gadgets.</p>
+            </div>
+        </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+<!-- Carousel End -->
+<!-- Filter bar -->
+<div class="d-flex flex-wrap align-items-center gap-2 mb-3">
+    <span class="fw-semibold"><i class="bi bi-funnel me-1"></i>Categories:</span>
+    <a asp-action="Index" asp-controller="Products" class="badge-category text-decoration-none @(Model.CategoryId == null ? "bg-warning text-dark" : "")">All</a>
+    @foreach (var cat in Model.Categories)
+    {
+        <a asp-action="Index" asp-controller="Products" asp-route-categoryId="@cat.CategoryId"
+           class="badge-category text-decoration-none @(Model.CategoryId == cat.CategoryId ? "bg-warning text-dark" : "")">
+            @cat.CategoryName
+        </a>
+    }
+</div>
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h5 class="mb-0"><i class="bi bi-grid-3x3-gap-fill me-2 text-primary"></i>Featured Products</h5>
+    <a class="small text-decoration-none fw-semibold" asp-controller="Products" asp-action="Index">
+        View all <i class="bi bi-arrow-right"></i>
+    </a>
+</div>
+
+<!-- Product grid -->
+<div class="row g-4">
+    @foreach (var p in Model.Products)
+    {
+        <!-- col-lg-3 ensures 4 products per row (4x2 = 8 items perfectly) -->
+        <div class="col-6 col-md-4 col-lg-3">
+            <div class="card product-card h-100">
+                <img src="@(string.IsNullOrEmpty(p.ImageUrl) ? "https://picsum.photos/300/200" : p.ImageUrl)" alt="@p.ProductName" />
+                <div class="card-body d-flex flex-column">
+                    <span class="badge-category mb-2 d-inline-block">@p.CategoryName</span>
+                    <h6 class="card-title fw-semibold mb-1 text-truncate">@p.ProductName</h6>
+                    <p class="card-text small text-muted mb-2">@(p.Description?.Length > 50 ? p.Description.Substring(0, 50) + "…" : p.Description)</p>
+                    <div class="mt-auto d-flex justify-content-between align-items-center">
+                        <span class="price-text">₹@p.Price.ToString("N0")</span>
+                        <a class="btn btn-sm btn-vcart" asp-controller="Products" asp-action="Details" asp-route-id="@p.ProductId">
+                            View
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<!-- DYNAMIC PAGINATION CONTAINER -->
+@{
+    // Safely read ViewBag values and default to 1 if null
+    int currentPage = ViewBag.CurrentPage ?? 1;
+    int totalPages = ViewBag.TotalPages ?? 1;
+}
+
+<!-- Only show pagination if there is more than 1 page -->
+@if (totalPages > 1)
+{
+    <div class="pagination-container mt-5 mb-4">
+        <ul class="pagination">
+            <!-- Previous Button -->
+            <li class="page-item @(currentPage == 1 ? "disabled" : "")">
+                <a class="page-link"
+                   asp-action="Index"
+                   asp-route-page="@(currentPage - 1)">
+                    Previous
+                </a>
+            </li>
+
+            <!-- Page Numbers -->
+            @for (int i = 1; i <= totalPages; i++)
+            {
+                <li class="page-item @(i == currentPage ? "active" : "")">
+                    <a class="page-link"
+                       asp-action="Index"
+                       asp-route-page="@i">
+                        @i
+                    </a>
+                </li>
+            }
+
+            <!-- Next Button -->
+            <li class="page-item @(currentPage == totalPages ? "disabled" : "")">
+                <a class="page-link"
+                   asp-action="Index"
+                   asp-route-page="@(currentPage + 1)">
+                    Next
+                </a>
+            </li>
+        </ul>
+    </div>
+}
+
+@if (!Model.Products.Any())
+{
+    <div class="alert alert-info mt-4">
+        <i class="bi bi-info-circle me-1"></i>No products available yet.
+    </div>
+}

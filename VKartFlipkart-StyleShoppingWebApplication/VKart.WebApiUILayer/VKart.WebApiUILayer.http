@@ -1,0 +1,6 @@
+@VKart.WebApiUILayer_HostAddress = http://localhost:5172
+
+GET {{VKart.WebApiUILayer_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

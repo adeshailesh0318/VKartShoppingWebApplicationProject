@@ -1,0 +1,106 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using VKart.ModelsLayer.Entities
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@inject VKart.ServicesLayer.Interfaces.ICartService CartService
+
+<nav class="navbar navbar-expand-lg shadow-sm" style="background-color:#1a2b4c;">
+    <div class="container">
+        <a class="navbar-brand fw-bold fs-4 text-white" asp-controller="Home" asp-action="Index">
+            <i class="bi bi-cart4 me-2"></i>V-Cart
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navMain">
+            <!-- Search form -->
+            <form class="mx-auto my-2 my-lg-0" method="get" asp-controller="Products" asp-action="Index"
+                  style="max-width:450px; width:100%;">
+                <div class="input-group">
+                    <input class="form-control border-0" type="search" name="search" placeholder="Search products..." />
+                    <button class="btn btn-warning border-0" type="submit"><i class="bi bi-search"></i></button>
+                </div>
+            </form>
+
+            <ul class="navbar-nav ms-auto align-items-lg-center">
+                <li class="nav-item me-2">
+                    <a class="nav-link text-white-50" asp-controller="Products" asp-action="Index">
+                        <i class="bi bi-grid me-1"></i>Products
+                    </a>
+                </li>
+
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    var user = await UserManager.GetUserAsync(User);
+                    var roles = await UserManager.GetRolesAsync(user!);
+                    var isAdmin = roles.Contains("Admin");
+
+                    // Cart Logic
+                    var userId = UserManager.GetUserId(User);
+                    var cartResult = await CartService.GetCartAsync(userId!);
+                    var cartCount = cartResult.Data?.TotalItems ?? 0;
+
+                    <li class="nav-item me-2">
+                        <a class="nav-link text-white-50 position-relative" asp-controller="Cart" asp-action="Index">
+                            <i class="bi bi-cart3"></i> Cart
+                            @if (cartCount > 0)
+                            {
+                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 0.65rem;">
+                                    @cartCount
+                                </span>
+                            }
+                        </a>
+                    </li>
+                    <li class="nav-item me-2">
+                        <a class="nav-link text-white-50" asp-controller="Orders" asp-action="Index">
+                            <i class="bi bi-receipt me-1"></i>Orders
+                        </a>
+                    </li>
+
+                    @if (isAdmin)
+                    {
+                        <li class="nav-item dropdown me-2">
+                            <a class="nav-link text-white-50 dropdown-toggle" data-bs-toggle="dropdown" href="#">
+                                <i class="bi bi-shield-lock me-1"></i>Admin
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item" asp-area="Admin" asp-controller="Dashboard" asp-action="Index"><i class="bi bi-speedometer2 me-2"></i>Dashboard</a></li>
+                                <li><a class="dropdown-item" asp-area="Admin" asp-controller="Products" asp-action="Index"><i class="bi bi-box-seam me-2"></i>Products</a></li>
+                                <li><a class="dropdown-item" asp-area="Admin" asp-controller="Categories" asp-action="Index"><i class="bi bi-tags me-2"></i>Categories</a></li>
+                                <li><a class="dropdown-item" asp-area="Admin" asp-controller="Orders" asp-action="Index"><i class="bi bi-list-check me-2"></i>Orders</a></li>
+                                <!-- Naya Customers Link -->
+                                <li><a class="dropdown-item" asp-area="Admin" asp-controller="Customers" asp-action="Index"><i class="bi bi-people me-2"></i>Customers</a></li>
+                            </ul>
+                        </li>
+                    }
+
+                    <li class="nav-item me-2">
+                        <span class="nav-link text-white-50">
+                            <i class="bi bi-person-circle me-1"></i>@user!.FullName
+                        </span>
+                    </li>
+                    <li class="nav-item">
+                        <form asp-controller="Account" asp-action="Logout" method="post" class="d-inline">
+                            <button class="nav-link text-white-50 border-0 bg-transparent" type="submit">
+                                <i class="bi bi-box-arrow-right me-1"></i>Logout
+                            </button>
+                        </form>
+                    </li>
+                }
+                else
+                {
+                    <li class="nav-item me-2">
+                        <a class="nav-link text-white-50" asp-controller="Account" asp-action="Login">
+                            <i class="bi bi-box-arrow-in-right me-1"></i>Login
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-warning btn-sm fw-semibold" asp-controller="Account" asp-action="Register">Register</a>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+</nav>

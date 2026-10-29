@@ -1,0 +1,79 @@
+﻿@model VKart.PresentationLayer.ViewModels.CheckoutViewModel
+@{
+    ViewData["Title"] = "Checkout";
+}
+
+<h3 class="fw-bold mb-4">Checkout</h3>
+
+<form asp-action="Checkout" method="post" class="row g-4">
+    <!-- Left: Address Form -->
+    <div class="col-lg-7">
+        <div class="card border-0 shadow-sm rounded-4 mb-4">
+            <div class="card-body p-4">
+                <h5 class="fw-bold mb-3"><i class="bi bi-geo-alt me-2"></i>Shipping Address</h5>
+
+                <div asp-validation-summary="ModelOnly" class="text-danger small mb-3"></div>
+
+                <div class="mb-3">
+                    <label asp-for="ShippingAddress" class="form-label fw-semibold"></label>
+                    <textarea asp-for="ShippingAddress" class="form-control" rows="4" placeholder="House no, Street, City, State, PIN Code"></textarea>
+                    <span asp-validation-for="ShippingAddress" class="text-danger small"></span>
+                </div>
+
+                <div class="alert alert-info bg-info bg-opacity-10 border-0 rounded-3 mt-3 mb-0">
+                    <i class="bi bi-info-circle me-2"></i> <strong>Payment Method:</strong> Cash on Delivery (COD)
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Right: Order Summary -->
+    <div class="col-lg-5">
+        <div class="card border-0 shadow-sm rounded-4">
+            <div class="card-body p-4">
+                <h5 class="fw-bold mb-4">Order Summary</h5>
+
+                <!-- Mini cart list -->
+                @foreach (var item in Model.Cart.Items)
+                {
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <div class="d-flex align-items-center gap-2">
+                            <img src="@(item.ImageUrl ?? "")" class="rounded bg-light" style="width:40px; height:40px; object-fit:contain;" />
+                            <div>
+                                <div class="small fw-semibold text-truncate" style="max-width: 150px;">@item.ProductName</div>
+                                <div class="text-muted small">Qty: @item.Quantity</div>
+                            </div>
+                        </div>
+                        <span class="small fw-semibold">₹@item.LineTotal.ToString("N0")</span>
+                    </div>
+                }
+
+                <hr />
+
+                <div class="d-flex justify-content-between mb-2">
+                    <span class="text-muted">Subtotal</span>
+                    <span class="fw-semibold">₹@Model.Cart.SubTotal.ToString("N0")</span>
+                </div>
+                <div class="d-flex justify-content-between mb-3">
+                    <span class="text-muted">Shipping</span>
+                    <span class="text-success fw-semibold">Free</span>
+                </div>
+
+                <hr />
+
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <span class="fs-5 fw-bold">Total</span>
+                    <span class="fs-4 fw-bold text-dark">₹@Model.Cart.SubTotal.ToString("N0")</span>
+                </div>
+
+                <button type="submit" class="btn btn-vcart btn-lg w-100">
+                    Place Order (COD)
+                </button>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
